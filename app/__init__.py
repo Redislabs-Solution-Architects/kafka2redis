@@ -1,8 +1,8 @@
 import os
 
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request
 
-from app.controllers import login_controller, cart_controller, home_controller
+from app.controllers import login_controller, cart_controller, home_controller, search_controller
 from app.utility import redis_connect
 from dotenv import load_dotenv
 
@@ -39,4 +39,9 @@ def view_cart():
 @app.route("/updatecart", methods=["POST"])
 def update_cart():
     return cart_controller.update_cart(request)
+
+
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    return search_controller.view_search(request, None)
 

@@ -1,0 +1,62 @@
+{% extends 'base.html' %} {% block title %}Store{% endblock %} {% block header %}{% endblock %}
+{% block app_content %}
+  <div class="container">
+    <form
+      name="search"
+      action="{{ action_url }}"
+      method="POST"
+      class="shadow-lg p-3 mb-5 bg-body rounded-4 container position-relative"
+    >
+      <h2 class="m-1 mb-3 h2 fw-semibold text-center">Search</h2>
+      {% if error %}
+        <div class="row mb-3 justify-content-center">
+          <div class="col-4">
+            <span class="text-center">{{ error }}</span>
+          </div>
+        </div>
+      {% endif %}
+      <div class="row mb-3 justify-content-center">
+        <div class="col-4">
+          <label for="user_id" class="row-form-label">User:</label>
+          <input type="text" class="form-control" placeholder="User ID" name="user_id" id="user_id" />
+        </div>
+      </div>
+      <div class="row mb-3 justify-content-center">
+        <div class="col-4">
+          <label for="description" class="row-form-label">Description:</label>
+          <input type="text" class="form-control" placeholder="Description" name="description" id="description" />
+        </div>
+      </div>
+      <div class="row mb-3 justify-content-center">
+        <div class="col-4">
+          <label for="from_date" class="row-form-label">From:</label>
+          <input type="text" class="form-control" placeholder="From date" name="from_date" id="from_date"/>
+        </div>
+      </div>
+      <div class="row mb-3 justify-content-center">
+        <div class="col-4">
+          <label for="to_date" class="row-form-label">To:</label>
+          <input type="text" class="form-control" placeholder="To date" name="to_date" id="to_date" />
+        </div>
+      </div>
+      <div class="row mb-3 justify-content-center">
+        <div class="col-4">
+          <label for="min_amount" class="row-form-label">Min amount:</label>
+          <input type="text" class="form-control" placeholder="amount" name="min_amount" id="min_amount" />
+        </div>
+      </div>
+      <div class="row mb-3 justify-content-center">
+        <div class="col-4">
+          <label for="max_amount" class="row-form-label">Max amount:</label>
+          <input type="text" class="form-control" placeholder="amount" name="max_amount" id="max_amount" />
+        </div>
+      </div>
+      <div class="mt-2 d-flex justify-content-center">
+        <input type="submit" class="btn btn-success" value="Ok"/>
+        <input type="button" class="btn" value="Cancel" onclick="location.href='/'"/>
+      </div>
+    </form>
+  </div>
+{% endblock %} {% block script %}
+  <script type="application/javascript"></script>
+{% endblock %}
