@@ -1,0 +1,66 @@
+{% extends 'base.html' %} {% block title %}Store{% endblock %} {% block header %}{% endblock %}
+{% block app_content %}
+  <div class="container">
+    <header class="App-header rounded-top-4 fw-semibold">Welcome {{ name }}</header>
+    <form
+      name="cart"
+      action="{{ action_url }}"
+      method="POST"
+      class="shadow-lg p-3 mb-5 bg-body rounded-4 container position-relative"
+    >
+      <h2 class="m-1 mb-3 h2 fw-semibold text-center">Your cart</h2>
+      <div class="row mb-3 justify-content-center">
+        {% if items %}
+          <table style="width: 400px">
+            <tbody>
+            <tr>
+              <th>Item</th>
+              <th>Count</th>
+            </tr>
+            {% for key, value in items.items() %}
+              <tr>
+                <td>{{ key }}</td>
+                <td>{{ value }}</td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        {% else %}
+          <span class="text-center">Is empty</span>
+        {% endif %}
+      </div>
+      <h2 class="m-1 mb-3 h2 fw-semibold text-center">Items</h2>
+      <div class="row mb-3 justify-content-center">
+        <div class="col-4">
+          <label for="items" class="row-form-label">Item name:</label>
+          <select name="items" id="item-select">
+            <option value="tomato">Tomato</option>
+            <option value="lemon">Lemon</option>
+            <option value="orange">Orange</option>
+            <option value="apple">Apple</option>
+            <option value="banana">Banana</option>
+            <option value="apricot">Apricot</option>
+          </select>
+        </div>
+      </div>
+      <div class="row mb-3 justify-content-center">
+        <div class="col-4">
+          <label for="count" class="row-form-label">Count:</label>
+          <input type="text" class="form-control" placeholder="Count" name="count" id="count"/>
+        </div>
+        {% if error_msg %}
+          <div class="row mb-3 justify-content-center">
+            <div class="col-4">
+              <span style="color: red">{{ error_msg }}</span>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+      <div class="mt-2 d-flex justify-content-center">
+        <input type="submit" class="btn btn-success" value="Add to cart"/>
+      </div>
+    </form>
+  </div>
+{% endblock %} {% block script %}
+  <script type="application/javascript"></script>
+{% endblock %}

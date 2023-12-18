@@ -1,0 +1,6 @@
+flask==2.3.2
+pytest==7.3.1
+pytest-env==0.8.1
+python-dotenv==1.0.0
+redis==4.5.5
+requests==2.31.0

@@ -1,0 +1,8 @@
+.env
+.venv
+.envrc
+__pycache__/
+.pytest_cache/
+.DS_Store
+.idea/
+redis_data/

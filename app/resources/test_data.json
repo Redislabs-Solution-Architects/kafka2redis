@@ -1,0 +1,42 @@
+[
+    {
+        "id": "asodifu",
+        "type": "credit",
+        "from_account": "12345",
+        "to_account": "45678",
+        "user_id": "u1",
+        "date": 1702846885000,
+        "amount": 5000.23,
+        "description": "Mortgage payment"
+    },
+    {
+        "id": "as2edeifu",
+        "type": "credit",
+        "from_account": "12345",
+        "to_account": "45678",
+        "user_id": "u1",
+        "date": 1702933285000,
+        "amount": 100.23,
+        "description": "Auto payment"
+    },
+    {
+        "id": "wefadeifu",
+        "type": "debit",
+        "from_account": "12345",
+        "to_account": "45678",
+        "user_id": "u1",
+        "date": 1700254885000,
+        "amount": 300.44,
+        "description": "Spending money"
+    },
+    {
+        "id": "wefwe234eifu",
+        "type": "credit",
+        "from_account": "12345",
+        "to_account": "45678",
+        "user_id": "u2",
+        "date": 1700946085000,
+        "amount": 300.44,
+        "description": "Birthday money"
+    }
+]
