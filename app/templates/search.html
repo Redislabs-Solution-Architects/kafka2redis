@@ -31,7 +31,7 @@
         <div class="col-4">
           <label for="type" class="row-form-label">Type:</label>
           <select class="form-control" placeholder="Description" name="type" id="type">
-            <option value=""></option>
+            <option value="">All</option>
             <option value="credit">Credit</option>
             <option value="debit">Debit</option>
           </select>
@@ -61,6 +61,16 @@
           <input type="text" class="form-control" placeholder="amount" name="max_amount" id="max_amount" />
         </div>
       </div>
+      <div class="row mb-3 justify-content-center">
+        <div class="col-4">
+          <label for="sortby" class="row-form-label">Sort by:</label>
+          <select class="form-control" placeholder="Description" name="sortby" id="sortby">
+            <option value="date">Date</option>
+            <option value="amount">Amount</option>
+            <option value="user">User ID</option>
+          </select>
+        </div>
+      </div>
       <div class="mt-2 d-flex justify-content-center">
         <input type="submit" class="btn btn-success" value="Ok"/>
         <input type="button" class="btn" value="Cancel" onclick="location.href='/'"/>
@@ -69,6 +79,10 @@
     <h2 class="m-1 mb-3 h2 fw-semibold text-center">{{count}} Results</h2>
     <pre>
       {{result|tojson_pretty}}
+    </pre>
+    <h2 class="m-1 mb-3 h2 fw-semibold text-center">Total by user</h2>
+    <pre>
+      {{totals|tojson_pretty}}
     </pre>
   </div>
 {% endblock %} {% block script %}

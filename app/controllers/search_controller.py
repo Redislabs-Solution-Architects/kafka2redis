@@ -3,6 +3,8 @@ import json, sys
 from datetime import datetime
 from flask import render_template, redirect
 from redis.commands.search.query import Query, NumericFilter
+from redis.commands.search.aggregation import AggregateRequest
+from redis.commands.search import reducers
 
 from app.utility import redis_conn, session
 
@@ -15,9 +17,13 @@ def view_search(request, error_msg):
     max_amount = request.form.get("max_amount") or ''
     type = request.form.get("type") or ''
     description = request.form.get("description") or ''
+    sortby = request.form.get("sortby")
 
     query_string = ""
-    if description != '':
+
+    if description == "*":
+        query_string = "*"
+    elif description != '':
         query_string = f'@description:("{description}")'
 
     if user_id != '':
@@ -52,14 +58,28 @@ def view_search(request, error_msg):
     elif to_date != '':
         query = query.add_filter(NumericFilter("date", 0, to_epoch))
 
+    if sortby == 'date':
+        query = query.sort_by("date", asc=False)
+    elif sortby == 'amount':
+        query = query.sort_by("amount", asc=False)
+    elif sortby == 'user':
+        query = query.sort_by("user_id", asc=True)
+
     result = redis_conn.ft('transaction_idx').search(query)
     count = result.total
 
     json_docs = []
     for i, doc in enumerate(result.docs): # makes no sense why I have to specify i here
         json_docs.append(json.loads(doc["json"]))
+
+    # Show aggregations
+    request = AggregateRequest(f'*').group_by('@user_id', reducers.sum('@amount').alias('sum'))
+    agg_result = redis_conn.ft('transaction_idx').aggregate(request)
+    print(agg_result.rows)
+
+    totals = []
+    for i, row in enumerate(agg_result.rows):
+        user_json = dict({"id": row[1], "total": row[3]})
+        totals.append(user_json)
     
-
-    return render_template("search.html", action_url="/search", count=count, result=json_docs, error_msg=error_msg)
-
-
+    return render_template("search.html", action_url="/search", count=count, result=json_docs, totals=totals, error_msg=error_msg)
