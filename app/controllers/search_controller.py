@@ -1,5 +1,6 @@
 import json, sys
 
+from datetime import datetime
 from flask import render_template, redirect
 from redis.commands.search.query import Query, NumericFilter
 
@@ -22,6 +23,9 @@ def view_search(request, error_msg):
     if user_id != '':
         query_string += " @user_id:{" + user_id + "}"
 
+    if type != '':
+        query_string += " @type:{" + type + "}"
+
     if query_string != '':
         query = Query(query_string)
     elif min_amount != '' or max_amount != '' or from_date != '' or to_date != '':
@@ -35,6 +39,18 @@ def view_search(request, error_msg):
         query = query.add_filter(NumericFilter("amount", min_amount, sys.maxsize))
     elif max_amount != '':
         query = query.add_filter(NumericFilter("amount", 0, max_amount))
+
+    if from_date != '':
+        from_epoch = datetime.strptime(from_date, '%m/%d/%y').timestamp()
+    if to_date != '':
+        to_epoch = datetime.strptime(to_date, '%m/%d/%y').timestamp()
+
+    if from_date != '' and to_date != '':
+        query = query.add_filter(NumericFilter("date", from_epoch, to_epoch))
+    elif from_date != '':
+        query = query.add_filter(NumericFilter("date", from_epoch, sys.maxsize))
+    elif to_date != '':
+        query = query.add_filter(NumericFilter("date", 0, to_epoch))
 
     result = redis_conn.ft('transaction_idx').search(query)
     count = result.total

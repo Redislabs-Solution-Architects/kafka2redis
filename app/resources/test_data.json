@@ -5,7 +5,7 @@
         "from_account": "12345",
         "to_account": "45678",
         "user_id": "u1",
-        "date": 1702846885000,
+        "date": 1702846885,
         "amount": 5000.23,
         "description": "Mortgage payment"
     },
@@ -15,7 +15,7 @@
         "from_account": "12345",
         "to_account": "45678",
         "user_id": "u1",
-        "date": 1702933285000,
+        "date": 1702933285,
         "amount": 100.23,
         "description": "Auto payment"
     },
@@ -25,7 +25,7 @@
         "from_account": "12345",
         "to_account": "45678",
         "user_id": "u1",
-        "date": 1700254885000,
+        "date": 1700254885,
         "amount": 300.44,
         "description": "Spending money"
     },
@@ -35,7 +35,7 @@
         "from_account": "12345",
         "to_account": "45678",
         "user_id": "u2",
-        "date": 1700946085000,
+        "date": 1700946085,
         "amount": 300.44,
         "description": "Birthday money"
     }
