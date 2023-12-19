@@ -1,4 +1,4 @@
-import os
+import os, json
 
 from flask import Flask, request
 
@@ -9,6 +9,13 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
+
+
+def to_pretty_json(value):
+    return json.dumps(value, sort_keys=True, indent=4, separators=(',', ': '))
+
+
+app.jinja_env.filters['tojson_pretty'] = to_pretty_json
 
 
 @app.route("/")

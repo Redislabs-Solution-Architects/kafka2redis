@@ -1,4 +1,4 @@
-import sys
+import json, sys
 
 from flask import render_template, redirect
 from redis.commands.search.query import Query, NumericFilter
@@ -16,30 +16,34 @@ def view_search(request, error_msg):
     description = request.form.get("description") or ''
 
     query_string = ""
-    if description is not '':
+    if description != '':
         query_string = f'@description:("{description}")'
 
-    if user_id is not '':
+    if user_id != '':
         query_string += " @user_id:{" + user_id + "}"
 
-    if query_string is not '':
+    if query_string != '':
         query = Query(query_string)
-    elif min_amount is not '' or max_amount is not '' or from_date is not '' or to_date is not '':
+    elif min_amount != '' or max_amount != '' or from_date != '' or to_date != '':
         query = Query("*")
     else:
         query = Query("")
  
-    if min_amount is not '' and max_amount is not '':
+    if min_amount != '' and max_amount != '':
         query = query.add_filter(NumericFilter("amount", min_amount, max_amount))
-    elif min_amount is not '':
+    elif min_amount != '':
         query = query.add_filter(NumericFilter("amount", min_amount, sys.maxsize))
-    elif max_amount is not '':
+    elif max_amount != '':
         query = query.add_filter(NumericFilter("amount", 0, max_amount))
 
     result = redis_conn.ft('transaction_idx').search(query)
+    count = result.total
 
-    print(result)
+    json_docs = []
+    for i, doc in enumerate(result.docs): # makes no sense why I have to specify i here
+        json_docs.append(json.loads(doc["json"]))
+    
 
-    return render_template("search.html", action_url="/search", result=result, error_msg=error_msg)
+    return render_template("search.html", action_url="/search", count=count, result=json_docs, error_msg=error_msg)
 
 

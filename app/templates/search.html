@@ -56,6 +56,10 @@
         <input type="button" class="btn" value="Cancel" onclick="location.href='/'"/>
       </div>
     </form>
+    <h2 class="m-1 mb-3 h2 fw-semibold text-center">{{count}} Results</h2>
+    <pre>
+      {{result|tojson_pretty}}
+    </pre>
   </div>
 {% endblock %} {% block script %}
   <script type="application/javascript"></script>
