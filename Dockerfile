@@ -1,10 +1,9 @@
 FROM python:3.11
 RUN mkdir /app
 WORKDIR /app
-COPY pyproject.toml poetry.lock README.md ./
+COPY requirements.txt README.md ./
 COPY app ./app
 ENV PYTHONPATH=${PYTHONPATH}:${PWD}
-RUN pip3 install poetry
-RUN poetry config virtualenvs.create false
-RUN poetry install --no-dev
-CMD ["poetry", "run", "flask", "run", "-p", "5050", "--host=0.0.0.0"]
+RUN pip install -r requirements.txt
+RUN python make_index.py
+CMD ["flask", "run", "-p", "5050", "--host=0.0.0.0"]

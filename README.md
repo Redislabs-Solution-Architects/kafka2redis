@@ -1,4 +1,4 @@
-# Store - a storefront ecommerce app
+# Transactions
 
 This is a simple Python and Flask app to ingest data from Kafka and store in Redis. It supports searching the data. It uses Flask as the web server since it's so easy to get up and running.
 
@@ -29,7 +29,7 @@ flask run
 You may run this service plus the Redis database from docker. We've provided a docker-compose files for the service,
 as well as for Redis. You must build the service image, then run docker-compose to bring it up.
 
-By default, this app is listening on port 5050, Redis on 6379
+By default, this app is listening on port 5000, Redis on 6379
 
 ```bash
 docker-compose -f docker-compose.yml build
@@ -54,3 +54,8 @@ rest of the code.
 
 Controllers are in `app/controllers`
 Utility functions are in `app/utility`
+
+There's a file `app/make_index.py` to generate the Redis search index. This is where you define the "schema" for searching.
+
+There's a file `app/ingest_data.py` to read JSON data from a file and write to Redis. The search index is updated automatically.
+

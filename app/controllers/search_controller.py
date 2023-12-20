@@ -15,7 +15,6 @@ def view_search(request, error_msg):
     to_date = request.form.get("to_date") or ''
     min_amount = request.form.get("min_amount") or ''
     max_amount = request.form.get("max_amount") or ''
-    type = request.form.get("type") or ''
     description = request.form.get("description") or ''
     sortby = request.form.get("sortby")
 
@@ -28,9 +27,6 @@ def view_search(request, error_msg):
 
     if user_id != '':
         query_string += " @user_id:{" + user_id + "}"
-
-    if type != '':
-        query_string += " @type:{" + type + "}"
 
     if query_string != '':
         query = Query(query_string)

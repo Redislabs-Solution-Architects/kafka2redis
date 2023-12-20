@@ -1,7 +1,6 @@
 [
     {
         "id": "asodifu",
-        "type": "credit",
         "from_account": "12345",
         "to_account": "45678",
         "user_id": "u1",
@@ -11,7 +10,6 @@
     },
     {
         "id": "as2edeifu",
-        "type": "credit",
         "from_account": "12345",
         "to_account": "45678",
         "user_id": "u1",
@@ -21,7 +19,6 @@
     },
     {
         "id": "wefadeifu",
-        "type": "debit",
         "from_account": "12345",
         "to_account": "45678",
         "user_id": "u1",
@@ -31,7 +28,6 @@
     },
     {
         "id": "wefwe234eifu",
-        "type": "credit",
         "from_account": "12345",
         "to_account": "45678",
         "user_id": "u2",

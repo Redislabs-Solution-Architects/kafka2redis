@@ -1,6 +1,5 @@
-from utility.create_index import CreateIndex
-from utility import redis_conn
+from utility.data_handler import DataHandler
 
-maker = CreateIndex()
+maker = DataHandler()
 
-maker.create_index(redis_conn, 'transaction_idx')
+maker.create_index("transaction_idx")

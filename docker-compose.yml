@@ -1,9 +1,9 @@
 version: '3.9'
 
 services:
-  store-app:
-    image: todo-app
-    container_name: todo-app
+  transaction-app:
+    image: transaction-app
+    container_name: transaction-app
     environment:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
@@ -12,3 +12,14 @@ services:
       dockerfile: Dockerfile
     ports:
       - '5050:5050'
+  redis:
+    image: redis/redis-stack:latest
+    container_name: redis
+    hostname: redis
+    environment:
+      REDIS_ARGS: "--port 6379"
+    ports:
+      - '6379:6379'
+      - '8001:8001'
+    volumes:
+      - ./redis_data:/data

@@ -3,7 +3,7 @@ import os, json
 from flask import Flask, request
 
 from app.controllers import login_controller, cart_controller, home_controller, search_controller
-from app.utility import redis_connect
+from app.utility.data_handler import DataHandler
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -52,3 +52,16 @@ def update_cart():
 def search():
     return search_controller.view_search(request, None)
 
+
+@app.route("/create_index", methods=["GET"])
+def create_index():
+    maker = DataHandler()
+    maker.create_index("transaction_idx")
+    return home_controller.show_home(request)
+
+
+@app.route("/ingest", methods=["GET"])
+def ingest():
+    maker = DataHandler()
+    maker.ingest_data()
+    return home_controller.show_home(request)
