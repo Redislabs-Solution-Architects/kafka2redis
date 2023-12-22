@@ -2,6 +2,13 @@
 
 This is a simple Python and Flask app to ingest data from Kafka and store in Redis. It supports searching the data. It uses Flask as the web server since it's so easy to get up and running.
 
+## Architecture
+
+This is a simplified diagram of using Kafka to get data into Cassandra (via a microservice) as well as into Redis using KafkaConnect and our Redis Kafka Connector.
+
+![Architecture](./images/KafkaCassandraRedis.png)
+
+See [Redis Kafka Connector](https://redis-field-engineering.github.io/redis-kafka-connect/)
 
 ## Prerequisites
 
@@ -53,9 +60,12 @@ The main "router" for the various endpoints is found in `app/__init.py__`. From 
 rest of the code.
 
 Controllers are in `app/controllers`
+
 Utility functions are in `app/utility`
 
-There's a file `app/make_index.py` to generate the Redis search index. This is where you define the "schema" for searching.
+The code for searching the Redis database is in [search_controller.py](./app/controllers/search_controller.py)
 
-There's a file `app/ingest_data.py` to read JSON data from a file and write to Redis. The search index is updated automatically.
+There's a file [make_index.py](./app/make_index.py) to generate the Redis search index. This is where you define the "schema" for searching.
+
+There's a file [ingest_data.py](app/ingest_data.py) to read JSON data from a file and write to Redis. The search index is updated automatically.
 
