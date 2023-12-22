@@ -10,6 +10,24 @@ This is a simplified diagram of using Kafka to get data into Cassandra (via a mi
 
 See [Redis Kafka Connector](https://redis-field-engineering.github.io/redis-kafka-connect/)
 
+## Data Schema
+
+The data schema is a JSON object consisting of the folling:
+
+```json
+{
+    "id": "string",
+    "description": "string",
+    "from_account": "string",
+    "to_account": "string",
+    "user_id": "string",
+    "amount": 5000.23,
+    "date": 1700254885,
+}
+```
+
+See [test_data.json](./app/resources/test_data.json) for an example.
+
 ## Prerequisites
 
 - Python 3.11 or greater
