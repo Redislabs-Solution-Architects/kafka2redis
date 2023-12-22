@@ -56,7 +56,7 @@ docker run -d --name redis-stack-server -p 6379:6379 redis/redis-stack-server:la
 ```
 
 ## Code
-The main "router" for the various endpoints is found in `app/__init.py__`. From there you should be able to trace the
+The main "router" for the various endpoints is found in [__init__.py](app/__init.py__). From there you should be able to trace the
 rest of the code.
 
 Controllers are in `app/controllers`
