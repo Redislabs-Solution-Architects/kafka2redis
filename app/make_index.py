@@ -1,5 +1,5 @@
-from utility.data_handler import DataHandler
+from utility import data_handler, redis_conn
 
-maker = DataHandler()
+maker = data_handler.DataHandler()
 
-maker.create_index("transaction_idx")
+maker.create_index("transaction_idx", redis_conn)

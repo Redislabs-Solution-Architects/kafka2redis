@@ -4,6 +4,7 @@ from flask import Flask, request
 
 from app.controllers import login_controller, cart_controller, home_controller, search_controller
 from app.utility.data_handler import DataHandler
+from app.utility import redis_conn
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -56,12 +57,12 @@ def search():
 @app.route("/create_index", methods=["GET"])
 def create_index():
     maker = DataHandler()
-    maker.create_index("transaction_idx")
+    maker.create_index("transaction_idx", redis_conn)
     return home_controller.show_home(request)
 
 
 @app.route("/ingest", methods=["GET"])
 def ingest():
     maker = DataHandler()
-    maker.ingest_data()
+    maker.ingest_data(redis_conn)
     return home_controller.show_home(request)

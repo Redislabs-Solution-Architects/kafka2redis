@@ -1,15 +1,13 @@
 import json
 
-from app.utility import redis_conn
-
 from redis.commands.search.field import NumericField, TagField, TextField
 from redis.commands.search.indexDefinition import IndexDefinition, IndexType
 
 class DataHandler(object):
 
-    def create_index(self, index_name):
+    def create_index(self, index_name, redis_client):
         try: 
-            redis_conn.ft(index_name).dropindex()
+            redis_client.ft(index_name).dropindex()
         except:
             pass
 
@@ -23,11 +21,11 @@ class DataHandler(object):
             NumericField('$.amount', as_name='amount'),
             NumericField('$.date', as_name='date'),
         ]
-        result = redis_conn.ft(index_name).create_index(schema, definition=idx_def)
+        result = redis_client.ft(index_name).create_index(schema, definition=idx_def)
         print(result)
         
 
-    def ingest_data(self):
+    def ingest_data(self, redis_client):
         # Opening JSON file
         f = open('app/resources/test_data.json')
         
@@ -39,7 +37,7 @@ class DataHandler(object):
             print(item)
             key = f'transaction:{item["id"]}'
             date = item["date"]
-            redis_conn.json().set(key, "$", item)
+            redis_client.json().set(key, "$", item)
         
         # Closing file
         f.close()
