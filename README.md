@@ -57,8 +57,8 @@ as well as for Redis. You must build the service image, then run docker-compose 
 By default, this app is listening on port 5000, Redis on 6379
 
 ```bash
-docker-compose -f docker-compose.yml build
-docker-compose -f docker-compose.yml up -d
+docker-compose build
+docker-compose up -d
 ```
 
 ## Testing
