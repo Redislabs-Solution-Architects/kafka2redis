@@ -9,7 +9,11 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+INDEX_NAME = "transaction_idx"
 app = Flask(__name__)
+
+maker = DataHandler()
+maker.create_index(INDEX_NAME, redis_conn)
 
 
 def to_pretty_json(value):
@@ -19,7 +23,7 @@ def to_pretty_json(value):
 app.jinja_env.filters['tojson_pretty'] = to_pretty_json
 
 
-@app.route("/")
+@app.route("/home")
 def home():
     return home_controller.show_home(request)
 
@@ -49,6 +53,7 @@ def update_cart():
     return cart_controller.update_cart(request)
 
 
+@app.route("/", methods=["GET"])
 @app.route("/search", methods=["GET", "POST"])
 def search():
     return search_controller.view_search(request, None)
@@ -56,13 +61,17 @@ def search():
 
 @app.route("/create_index", methods=["GET"])
 def create_index():
-    maker = DataHandler()
-    maker.create_index("transaction_idx", redis_conn)
+    maker.create_index(INDEX_NAME, redis_conn)
     return home_controller.show_home(request)
 
 
 @app.route("/ingest", methods=["GET"])
 def ingest():
-    maker = DataHandler()
     maker.ingest_data(redis_conn)
     return home_controller.show_home(request)
+
+@app.route("/sample_data", methods=["GET"])
+def sample_data():
+    f = open('app/resources/test_data.json')
+    data = json.load(f)
+    return data

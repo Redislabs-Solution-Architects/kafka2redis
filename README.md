@@ -50,16 +50,20 @@ pip install -r requirements.txt
 flask run
 ```
 
+The app is running here by default [http://localhost:5000](http://localhost:5000)
+
 ## Docker
 You may run this service plus the Redis database from docker. We've provided a docker-compose files for the service,
 as well as for Redis. You must build the service image, then run docker-compose to bring it up.
 
-By default, this app is listening on port 5000, Redis on 6379
+By default, this app is listening on port 5050, Redis on 6379
 
 ```bash
 docker-compose build
 docker-compose up -d
 ```
+
+The app is found here by default when running with docker: [http://localhost:5050](http://localhost:5050)
 
 ## Testing
 ```bash

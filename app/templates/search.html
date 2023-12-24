@@ -7,7 +7,7 @@
       method="POST"
       class="shadow-lg p-3 mb-5 bg-body rounded-4 container position-relative"
     >
-      <h2 class="m-1 mb-3 h2 fw-semibold text-center">Search</h2>
+      <h2 class="m-1 mb-3 h2 fw-semibold text-center">Search Redis (click <a href="/sample_data">here</a> for sample data)</h2>
       {% if error %}
         <div class="row mb-3 justify-content-center">
           <div class="col-4">
@@ -18,37 +18,37 @@
       <div class="row mb-3 justify-content-center">
         <div class="col-4">
           <label for="user_id" class="row-form-label">User:</label>
-          <input type="text" class="form-control" placeholder="User ID" name="user_id" id="user_id" />
+          <input type="text" class="form-control" placeholder="u1" name="user_id" id="user_id" />
         </div>
       </div>
       <div class="row mb-3 justify-content-center">
         <div class="col-4">
           <label for="description" class="row-form-label">Description:</label>
-          <input type="text" class="form-control" placeholder="Description" name="description" id="description" />
+          <input type="text" class="form-control" placeholder="*" name="description" id="description" />
         </div>
       </div>
       <div class="row mb-3 justify-content-center">
         <div class="col-4">
           <label for="from_date" class="row-form-label">From:</label>
-          <input type="text" class="form-control" placeholder="From date" name="from_date" id="from_date"/>
+          <input type="text" class="form-control" placeholder="10/10/2021" name="from_date" id="from_date"/>
         </div>
       </div>
       <div class="row mb-3 justify-content-center">
         <div class="col-4">
           <label for="to_date" class="row-form-label">To:</label>
-          <input type="text" class="form-control" placeholder="To date" name="to_date" id="to_date" />
+          <input type="text" class="form-control" placeholder="12/12/2026" name="to_date" id="to_date" />
         </div>
       </div>
       <div class="row mb-3 justify-content-center">
         <div class="col-4">
           <label for="min_amount" class="row-form-label">Min amount:</label>
-          <input type="text" class="form-control" placeholder="amount" name="min_amount" id="min_amount" />
+          <input type="text" class="form-control" placeholder="0" name="min_amount" id="min_amount" />
         </div>
       </div>
       <div class="row mb-3 justify-content-center">
         <div class="col-4">
           <label for="max_amount" class="row-form-label">Max amount:</label>
-          <input type="text" class="form-control" placeholder="amount" name="max_amount" id="max_amount" />
+          <input type="text" class="form-control" placeholder="6000.29" name="max_amount" id="max_amount" />
         </div>
       </div>
       <div class="row mb-3 justify-content-center">

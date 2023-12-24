@@ -7,7 +7,10 @@ class DataHandler(object):
 
     def create_index(self, index_name, redis_client):
         try: 
-            redis_client.ft(index_name).dropindex()
+            info = redis_client.ft(index_name).info()
+            if info is not None:
+                print("Index already exists\n")
+                return
         except:
             pass
 
